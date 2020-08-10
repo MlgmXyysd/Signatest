@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         tvCheck = findViewById(R.id.local_check);
         tvMD5 = findViewById(R.id.network_md5);
+        StringBuilder sb = new StringBuilder();
         try {
             packageInfo = context.getPackageManager().getPackageInfo(BuildConfig.APPLICATION_ID, 0);
         } catch (PackageManager.NameNotFoundException e) {
@@ -57,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
         }
         applicationInfo = context.getApplicationInfo();
         File packageResourcePath = new File(context.getPackageResourcePath());
+        sb.append("packageResourcePath：").append(context.getPackageResourcePath()).append("\n");
         File packageSourceDirPath = new File(packageInfo.applicationInfo.sourceDir);
+        sb.append("packageSourceDir：").append(packageInfo.applicationInfo.sourceDir).append("\n");
         File applicationSourceDirPath = new File(applicationInfo.sourceDir);
-        StringBuilder sb = new StringBuilder();
+        sb.append("applicationSourceDir：").append(applicationInfo.sourceDir).append("\n");
         sb.append("预期签名值：" + SIGN + "\n");
         for (String signature : getSignaturePackageInfo()) {
             sb.append("java层签名: ").append(signature).append("\n");
